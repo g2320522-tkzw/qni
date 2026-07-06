@@ -13,3 +13,4 @@ examples/elements-example/public/
 packages/common/docs/
 packages/elements/docs/
 packages/simulator/docs/
+pnpm-lock.yaml
