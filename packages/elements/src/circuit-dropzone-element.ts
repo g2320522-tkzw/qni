@@ -7,6 +7,7 @@ import {createMachine, interpret} from 'xstate'
 import interact from 'interactjs'
 import {isResizeable} from './mixin'
 import wiresIcon from '../icon/wires.svg'
+console.log('wiresIcon:', wiresIcon)
 
 export const isCircuitDropzoneElement = (arg: unknown): arg is CircuitDropzoneElement =>
   arg !== undefined && arg !== null && arg instanceof CircuitDropzoneElement
@@ -314,6 +315,54 @@ export class CircuitDropzoneElement extends HTMLElement {
   }
 
   private get wireSvg(): TemplateResult {
-    return html([wiresIcon] as unknown as TemplateStringsArray)
+    return html`
+      <svg part="wires" width="48" height="48" viewBox="0 0 48 48" preserveAspectRatio="none">
+        <line
+          part="wire-input"
+          x1="0"
+          y1="24"
+          x2="24"
+          y2="24"
+          stroke="currentColor"
+          stroke-width="2"
+          vector-effect="non-scaling-stroke"
+        ></line>
+
+        <line
+          part="wire-output"
+          x1="24"
+          y1="24"
+          x2="48"
+          y2="24"
+          stroke="currentColor"
+          stroke-width="2"
+          vector-effect="non-scaling-stroke"
+        ></line>
+
+        <line
+          id="connect-top"
+          part="connect-top"
+          x1="24"
+          y1="0"
+          x2="24"
+          y2="24"
+          stroke="currentColor"
+          stroke-width="4"
+          vector-effect="non-scaling-stroke"
+        ></line>
+
+        <line
+          id="connect-bottom"
+          part="connect-bottom"
+          x1="24"
+          y1="48"
+          x2="24"
+          y2="24"
+          stroke="currentColor"
+          stroke-width="4"
+          vector-effect="non-scaling-stroke"
+        ></line>
+      </svg>
+    `
   }
 }

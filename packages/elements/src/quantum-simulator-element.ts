@@ -3,6 +3,7 @@ import {attr, controller, target, targets} from '@github/catalyst'
 import {html, render} from '@github/jtml'
 import {isBlochDisplayElement, isMeasurementGateElement} from './operation'
 import {CircleNotationElement} from './circle-notation-element'
+import {PaintNotationElement} from './paint-notation-element'
 import {QuantumCircuitElement} from './quantum-circuit-element'
 import {RunCircuitButtonElement} from './run-circuit-button-element'
 import {isIfable} from './mixin'
@@ -34,7 +35,10 @@ export class QuantumSimulatorElement extends HTMLElement {
   declare worker: Worker
 
   connectedCallback(): void {
-    this.worker = new Worker('./serviceworker.js')
+    console.log('connectedCallback')
+    this.worker = new Worker(new URL('../../../examples/elements-example/src/serviceworker.js', import.meta.url), {
+      type: 'module',
+    })
     this.worker.addEventListener('message', this.handleServiceWorkerMessage.bind(this))
 
     this.addEventListener('draggable:delete', this.maybeUpdateUrl)
@@ -62,9 +66,12 @@ export class QuantumSimulatorElement extends HTMLElement {
     this.update()
     this.maybeUpdateUrl()
 
-    this.circuit.setBreakpoint(this.circuit.stepAt(0))
+    setTimeout(() => {
+      console.log('steps after wait =', this.circuit.steps.length)
 
-    this.setCircleNotationQubitCount()
+      this.circuit.setBreakpoint(this.circuit.stepAt(0))
+      this.setCircleNotationQubitCount()
+    }, 0)
   }
 
   update(): void {
@@ -148,7 +155,9 @@ export class QuantumSimulatorElement extends HTMLElement {
     Util.need(serializedSteps.length > 0, 'non-zero step length')
     const circuitJson = this.circuit.toJson()
     const qubitCount = this.setCircleNotationQubitCount()
-
+    console.log('run called')
+    console.log('circuitJson =', circuitJson)
+    console.log('serializedSteps =', serializedSteps)
     this.worker.postMessage({
       qubitCount,
       stepIndex,

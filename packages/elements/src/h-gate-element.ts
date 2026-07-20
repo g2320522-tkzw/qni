@@ -11,7 +11,7 @@ import {
 import {ControllableMixin} from './mixin/controllable'
 import {SerializedHGateType} from '@qni/common'
 import {controller} from '@github/catalyst'
-import hGateIcon from '../icon/h-gate.svg'
+import hGateIcon from '../icon/h-gate-new.svg?raw'
 import {cD as connectDraggableGate, rI as renderIconGate, tI as toIfableGateJson} from './gate-element-helpers.js'
 
 export type HGateElementProps = {

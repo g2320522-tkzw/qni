@@ -1337,6 +1337,8 @@ export class QuantumCircuitElement extends HoverableMixin(HTMLElement) {
     for (const step of this.steps) {
       const dropzone = step.dropzoneAt(wireIndex)
 
+      dropzone.setAttribute('data-wire-index', String(wireIndex))
+
       dropzone.inputWireQuantum = wireQuantum
       if (dropzone.operationName === 'write-gate') {
         dropzone.inputWireQuantum = wireQuantum
@@ -1376,6 +1378,8 @@ export class QuantumCircuitElement extends HoverableMixin(HTMLElement) {
 
     const wireIndex = step.dropzones.indexOf(dropzone)
     Util.need(wireIndex !== -1, 'circuit-dropzone not found.')
+
+    dropzone.setAttribute('data-wire-index', String(wireIndex))
 
     this.updateWire(wireIndex)
   }
