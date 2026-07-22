@@ -5,7 +5,7 @@ import {colors} from './colors'
 type Amplitudes = {[ket: number]: Complex}
 
 export class PaintNotationElement extends HTMLElement {
-  private _qubitCount = 3
+  private _qubitCount = 5
 
   visibleQubitCircleKets: number[] = []
 
