@@ -8,7 +8,7 @@ import {
   MenuableMixin,
 } from './mixin'
 import {SerializedControlGateType} from '@qni/common'
-import controlGateIcon from '../icon/control-gate.svg?raw'
+import controlGateIcon from '../icon/control-gate-new.svg?raw'
 import {cD as connectDraggableGate, rI as renderIconGate, tS as toStaticGateJson} from './gate-element-helpers.js'
 import {controller} from '@github/catalyst'
 

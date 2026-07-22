@@ -11,7 +11,7 @@ import {
 import {ControllableMixin} from './mixin/controllable'
 import {SerializedXGateType} from '@qni/common'
 import {controller} from '@github/catalyst'
-import xGateIcon from '../icon/x-gate.svg?raw'
+import xGateIcon from '../icon/x-gate-new.svg?raw'
 import {cD as connectDraggableGate, rI as renderIconGate, tI as toIfableGateJson} from './gate-element-helpers.js'
 
 export type XGateElementProps = {

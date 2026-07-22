@@ -12,7 +12,7 @@ import {
 import {ControllableMixin} from './mixin/controllable'
 import {SerializedPhaseGateType} from '@qni/common'
 import {controller} from '@github/catalyst'
-import phaseGateIcon from '../icon/phase-gate.svg?raw'
+import phaseGateIcon from '../icon/phase-gate-new.svg?raw'
 import {cD as connectDraggableGate, rI as renderIconGate, tA as toAngleGateJson} from './gate-element-helpers.js'
 
 export type PhaseGateElementProps = {
