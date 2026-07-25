@@ -3474,7 +3474,7 @@ h-gate[data-disabled]::part(body) {
 h-gate::part(body) {
   border-radius: 0.25rem;
   border-radius: var(--qni-semantic-radius-default);
-  background-color: #10b981;
+  background-color: transparent;
   background-color: var(--qni-semantic-fill-color-primary);
 }
 
@@ -3901,7 +3901,7 @@ phase-gate[data-disabled]::part(body) {
 phase-gate::part(body) {
   border-radius: 9999px;
   border-radius: var(--qni-semantic-radius-circular);
-  background-color: #10b981;
+  background-color: transparent;
   background-color: var(--qni-semantic-fill-color-primary);
 }
 
@@ -8000,6 +8000,11 @@ x-gate::part(body) {
   flex-shrink: 0;
 }
 
+x-gate::part(body) {
+  border-radius: 0;
+  background-color: transparent;
+}
+
 x-gate::part(outline) {
   position: absolute;
   display: none;
@@ -8036,7 +8041,7 @@ x-gate[data-disabled]::part(body) {
 x-gate::part(body) {
   border-radius: 9999px;
   border-radius: var(--qni-semantic-radius-circular);
-  background-color: #10b981;
+  background-color: transparent;
   background-color: var(--qni-semantic-fill-color-primary);
 }
 
