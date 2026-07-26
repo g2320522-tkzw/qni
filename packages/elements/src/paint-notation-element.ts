@@ -61,27 +61,46 @@ export class PaintNotationElement extends HTMLElement {
   }
 
   private paintElementHtml(ket: number): string {
-    const binaryKet = ket.toString(2).padStart(this._qubitCount, '0')
-
     return `
-      <div
-        class="paint"
-        data-ket="${ket}"
-        data-amplitude-real="0"
-        data-amplitude-imag="0"
-        data-probability="0"
-        data-phase="0"
-      >
-        <div class="paint__container">
-          <div class="paint__empty"></div>
-          <div class="paint__liquid"></div>
-          <img class="paint__outline" src="/paint-bucket.svg" alt="" />
-          <div class="paint__value">
+    <div
+      class="paint"
+      data-ket="${ket}"
+      data-amplitude-real="0"
+      data-amplitude-imag="0"
+      data-probability="0"
+      data-phase="0"
+    >
+      <div class="paint__container">
+        <div class="paint__empty"></div>
+        <div class="paint__liquid"></div>
+
+        <div class="paint__phase">
+          <div class="paint__phase-arrow"></div>
+        </div>
+
+        <img class="paint__outline" src="/paint-bucket.svg" alt="" />
+
+        <div class="paint__value">
           0.0%
-          </div>
         </div>
       </div>
-    `
+
+      <div class="paint__bits">
+        ${Array.from({length: this._qubitCount}, (_, index) => {
+          const qubitColors = ['#ef4444', '#eab308', '#3b82f6', '#ffffff', '#000000']
+          const color = qubitColors[index % qubitColors.length]
+
+          return `
+            <div
+              class="paint__bit"
+              data-bit-index="${index}"
+              style="--qubit-color: ${color}"
+            ></div>
+          `
+        }).join('')}
+      </div>
+    </div>
+  `
   }
 
   private updatePaints(): void {
@@ -110,21 +129,16 @@ export class PaintNotationElement extends HTMLElement {
     paint.style.setProperty('--paint-level', probability.toString())
 
     const hiddenPercent = (1 - probability) * 100
-
     paint.style.setProperty('--paint-hidden-percent', `${hiddenPercent}%`)
 
     paint.style.setProperty('--paint-phase', `${phaseDeg}deg`)
 
     const color = colors[ket % colors.length]
-
     paint.style.setProperty('--paint-color', color)
 
     paint.dataset.amplitudeReal = amplitude.real.toString()
-
     paint.dataset.amplitudeImag = amplitude.imag.toString()
-
     paint.dataset.probability = probability.toString()
-
     paint.dataset.phase = phaseRad.toString()
 
     const valueElement = paint.querySelector<HTMLElement>('.paint__value')
@@ -133,7 +147,23 @@ export class PaintNotationElement extends HTMLElement {
       valueElement.textContent = `${(probability * 100).toFixed(1)}%`
     }
 
-    paint.classList.toggle('paint--empty', probability === 0)
+    const binaryKet = ket.toString(2).padStart(this._qubitCount, '0')
+
+    const bitElements = paint.querySelectorAll<HTMLElement>('.paint__bit')
+
+    bitElements.forEach(bitElement => {
+      const qubitIndex = Number(bitElement.dataset.bitIndex)
+
+      const isOne = ((ket >> qubitIndex) & 1) === 1
+
+      bitElement.classList.toggle('paint__bit--on', isOne)
+      bitElement.classList.toggle('paint__bit--off', !isOne)
+    })
+
+    const EPSILON = 1e-10
+
+    paint.classList.toggle('paint--empty', probability <= EPSILON)
+    paint.classList.toggle('paint--phase-hidden', probability <= EPSILON)
   }
 }
 
