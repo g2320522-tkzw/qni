@@ -1069,6 +1069,10 @@ export class QuantumCircuitElement extends HoverableMixin(HTMLElement) {
     }
   }
 
+  public restoreFromJson(json: string): void {
+    this.loadFromJson(json)
+  }
+
   private loadFromJson(json: string): void {
     // eslint-disable-next-line github/no-inner-html
     this.innerHTML = ''
