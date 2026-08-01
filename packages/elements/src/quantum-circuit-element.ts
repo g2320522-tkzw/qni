@@ -1042,9 +1042,7 @@ export class QuantumCircuitElement extends HoverableMixin(HTMLElement) {
   }
 
   appendWire(): void {
-    for (const each of this.steps) {
-      each.appendDropzone()
-    }
+    return
   }
 
   removeLastEmptyWires(): void {
