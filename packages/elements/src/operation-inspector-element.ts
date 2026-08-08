@@ -53,6 +53,28 @@ export class OperationInspectorElement extends HTMLElement {
     }
 
     if (isAngleable(operation)) {
+      this.conditionalGatePaneDisabled = true
+      this.anglePaneDisabled = false
+      this.conditionalFlagPaneDisabled = true
+
+      const ifPane = this.querySelector('#conditional-gate-pane')
+
+      const flagPane = this.querySelector('#conditional-flag-pane')
+
+      const anglePane = this.querySelector('#angle-pane')
+
+      if (ifPane instanceof HTMLElement) {
+        ifPane.style.display = 'none'
+      }
+
+      if (flagPane instanceof HTMLElement) {
+        flagPane.style.display = 'none'
+      }
+
+      if (anglePane instanceof HTMLElement) {
+        anglePane.style.display = 'flex'
+      }
+
       const denominator = angleDenominator(operation.angle)
 
       if (isPhaseGateElement(operation)) {

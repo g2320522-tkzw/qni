@@ -1,31 +1,13 @@
 operation-inspector {
   &[data-conditional-gate-pane-disabled] #conditional-gate-pane {
-    h1 {
-      @apply text-gray-300;
-    }
-
-    .pane-body {
-      @apply hidden;
-    }
+    @apply hidden;
   }
 
   &[data-angle-pane-disabled] #angle-pane {
-    h1 {
-      @apply text-gray-300;
-    }
-
-    .pane-body {
-      @apply hidden;
-    }
+    @apply hidden;
   }
 
   &[data-conditional-flag-pane-disabled] #conditional-flag-pane {
-    h1 {
-      @apply text-gray-300;
-    }
-
-    .pane-body {
-      @apply hidden;
-    }
+    @apply hidden;
   }
 }
